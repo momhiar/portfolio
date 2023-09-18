@@ -16,20 +16,31 @@ class WorkSampleImageAdmin(admin.ModelAdmin):
         )
 
 
+admin.site.register(WorkSampleImage, WorkSampleImageAdmin)
+
+
 class WorkSampleTagAdmin(admin.ModelAdmin):
     list_display = [
         'title'
     ]
 
 
+admin.site.register(WorkSampleTag, WorkSampleTagAdmin)
+
+
 class WorksampleAdmin(admin.ModelAdmin):
     list_display = [
         'title',
+        'tags_list'
     ]
     list_filter = ['tags']
     search_fields = ['title']
 
+    def tags_list(self, obj):
+        tags = []
+        for tag in obj.tags.all():
+            tags.append(tag.title)
+        return tags
 
-admin.site.register(WorkSampleImage, WorkSampleImageAdmin)
+
 admin.site.register(WorkSample, WorksampleAdmin)
-admin.site.register(WorkSampleTag, WorkSampleTagAdmin)
