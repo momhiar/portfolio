@@ -9,10 +9,16 @@ class WorkSampleImage(models.Model):
     alt = models.CharField(max_length=200)
     picture = models.ImageField(upload_to='work-samples')
 
+    def __str__(self):
+        return self.title
+
 
 class WorkSampleTag(models.Model):
     title = models.CharField(max_length=25)
     description = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.title
 
 
 class WorkSample(models.Model):
@@ -21,3 +27,6 @@ class WorkSample(models.Model):
     text = tinymce_models.HTMLField()
     gallery = models.ManyToManyField(WorkSampleImage)
     tags = models.ManyToManyField(WorkSampleTag)
+
+    def __str__(self):
+        return self.title
