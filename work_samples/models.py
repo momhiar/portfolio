@@ -22,6 +22,7 @@ class WorkSampleTag(models.Model):
 
 
 class WorkSample(models.Model):
+    slug = models.SlugField(unique=True)
     title = models.CharField(max_length=120)
     description = models.CharField(max_length=150)
     text = tinymce_models.HTMLField()
